@@ -46,6 +46,7 @@ def measure_detection_performance(detections, labels, labels_valid, min_iou=0.5)
 
             ####### ID_S4_EX1 START #######     
             #######
+            # inspiration: https://github.com/maudzung/Complex-YOLOv4-Pytorch/blob/a712f52542a35893ddedbd7b782f34f31a0ff796/src/utils/find_anchors.py
             print("student task ID_S4_EX1 ")
 
             ## step 1 : extract the four corners of the current label bounding-box

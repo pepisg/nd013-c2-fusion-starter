@@ -60,6 +60,7 @@ def load_configs_model(model_name='darknet', configs=None):
     elif model_name == 'fpn_resnet':
         ####### ID_S3_EX1-3 START #######     
         #######
+        # source: https://github.com/maudzung/SFA3D
         print("student task ID_S3_EX1-3")
         configs.model_path = os.path.join(parent_path, 'tools', 'objdet_models', 'resnet', 'models')
         configs.pretrained_filename = os.path.join(configs.model_path, 'pretrained', 'fpn_resnet_18_epoch_300.pth')
@@ -203,6 +204,7 @@ def detect_objects(input_bev_maps, model, configs):
             
             ####### ID_S3_EX1-5 START #######     
             #######
+            # source:  https://github.com/maudzung/SFA3D
             print("student task ID_S3_EX1-5")
             outputs['hm_cen'] = _sigmoid(outputs['hm_cen'])
             outputs['cen_offset'] = _sigmoid(outputs['cen_offset'])
