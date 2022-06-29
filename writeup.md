@@ -34,6 +34,27 @@ Trucks can cause big shadows over other cars, and their general dimensions are v
 
 Less points appear on cars as they fall further away from the sensor
 
+# BeV extraction
+The pictures below show the BeV image of the LIDAR pointcloud for the intensity and height channels in that order
+
+![Screenshot from 2022-06-28 21-12-45](https://user-images.githubusercontent.com/71234974/176336437-2b691226-3d34-4dac-bae5-e2da021bb183.png)
+
+![Screenshot from 2022-06-28 21-13-02](https://user-images.githubusercontent.com/71234974/176336434-0936747a-dba6-41b9-b194-7355fc585a37.png)
+
+# Object detection and projections
+In the image below you can see the cars detected on the BeV view, as well as the 3D bounding boxes projected over the RGB camera image
+
+![Screenshot from 2022-06-28 21-09-45](https://user-images.githubusercontent.com/71234974/176335934-2260c991-a083-49b3-8b58-2458cd0e1b50.png)
+
+
+# Performance evaluatuion
+
+The plots below show the distribution of performance metrics on detections performed over 100 samples in the dataset. Results may vary due to the IoU threshold selected
+![Screenshot from 2022-06-28 20-57-12](https://user-images.githubusercontent.com/71234974/176334633-3374a313-cad6-41eb-a7cc-d4d61fbbb247.png)
+
+When labels are used as detections, perfect scores are achieved as shown below: 
+![Screenshot from 2022-06-28 21-04-12](https://user-images.githubusercontent.com/71234974/176335633-cd3483ee-e09d-4d78-a4fe-4a36c3632045.png)
+
 
 # Writeup: Track 3D-Objects Over Time
 
