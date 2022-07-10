@@ -68,7 +68,7 @@ class Filter:
 
     def update(self, track, meas):
         ############
-        H = meas.sensor.get_H(meas.sensor.get_hx(track.x))
+        H = meas.sensor.get_H((track.x))
         gamma = self.gamma(track,meas)
         S = self.S(track, meas, None)
         K = track.P*H.transpose()*np.linalg.inv(S) # Kalman gain
@@ -77,7 +77,7 @@ class Filter:
         I = np.identity(params.dim_state)
         track.P = (I - K*H) * track.P # covariance update
         track.set_P(track.P)
-        return track.x, track.P   
+        # return track.x, track.P   
         ############
         
         ############
@@ -87,8 +87,7 @@ class Filter:
     
     def gamma(self, track, meas):
         ############
-        H = meas.sensor.get_H(meas.sensor.get_hx(track.x))
-        return meas.z - H*track.x
+        return meas.z - meas.sensor.get_hx(track.x)
         ############
         ############
         # END student code
@@ -96,7 +95,7 @@ class Filter:
 
     def S(self, track, meas, H):
         ############
-        H = meas.sensor.get_H(meas.sensor.get_hx(track.x))
+        H = meas.sensor.get_H((track.x))
         return H*track.P*H.transpose() + meas.R
         ############
         ############

@@ -66,16 +66,38 @@ RMSE with track mangement
 
 ![ex2](https://user-images.githubusercontent.com/71234974/178127195-6a33cb30-c9f5-4caa-8d55-59265fbfdced.png)
 
+Multi object RMSE
+
+![Figure_2](https://user-images.githubusercontent.com/71234974/178128614-22c3841e-6f1e-4cf2-8fd4-5de67c32f2e8.png)
+
+
 Please use this starter template to answer the following questions:
 
 ### 1. Write a short recap of the four tracking steps and what you implemented there (filter, track management, association, camera fusion). Which results did you achieve? Which part of the project was most difficult for you to complete, and why?
 
+The implementation had the following steps:
+
+1. Filter: A kalman filter class was implemented for tracking 6D movement of objects. 
+
+2. A tracking module was implemented to store the state of each tracked object over time and associate metadata like the score of the tracking result, the state of the track, etc.
+
+3. An association module was implemented to assign measurements to each of the tracked tracks according to the Mahalanobis distance.
+
+4. A camera sensor object was added to calculate appropriate non-linear jacobians to feed to the Kalman Filter created in the first step.
+
+The hardest part of the project was integrating the camera model, since the rest of the classes had to be compatible with two types of measurements with different dimensions: pixels (2D) coming from the camera and 3D lidar mesurements
 
 ### 2. Do you see any benefits in camera-lidar fusion compared to lidar-only tracking (in theory and in your concrete results)? 
 
+When the camera is integrated, RMSE is reduced. Additionally, ghost tracks occur less frequently and disappear faster when created by ghost/spurious detections on LIDAR data. In theory is also beneficial because it adds an extra source of information to the system, which should in general decrease the uncertanty (gausssian variance) of the final measured states.
 
 ### 3. Which challenges will a sensor fusion system face in real-life scenarios? Did you see any of these challenges in the project?
+
+Occlusion of objects, weather condition that hurt the performance of specific sensors like cameras, limited field of view, limited processing capacity for taking measurements from several data sources in real time.
+
+From the above, mainly occlusion was present on the project
 
 
 ### 4. Can you think of ways to improve your tracking results in the future?
 
+Tuning the noise parameters of the sensor may improve the model. Also, the association module could use a more sophisticated technique. Other object detection models may be tried out or trained.

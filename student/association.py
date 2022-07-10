@@ -39,16 +39,28 @@ class Association:
         ############
         
         # the following only works for at most one track and one measurement
-        self.association_matrix = np.matrix([]) # reset matrix
-        self.unassigned_tracks = [] # reset lists
-        self.unassigned_meas = []
+        # self.association_matrix = np.matrix([]) # reset matrix
+        # self.unassigned_tracks = [] # reset lists
+        # self.unassigned_meas = []
+
+        N = len(track_list) # N tracks
+        M = len(meas_list) # M measurements
+        self.unassigned_tracks = list(range(N))
+        self.unassigned_meas = list(range(M))
+        self.association_matrix = np.inf*np.ones((N,M)) 
+
+        for n, track in enumerate(track_list):
+            for m, meas in enumerate(meas_list):
+                mhd = self.MHD(track=track, meas=meas, KF=KF)
+                if self.gating(mhd, None):
+                    self.association_matrix[n,m] = mhd
         
-        if len(meas_list) > 0:
-            self.unassigned_meas = [0]
-        if len(track_list) > 0:
-            self.unassigned_tracks = [0]
-        if len(meas_list) > 0 and len(track_list) > 0: 
-            self.association_matrix = np.matrix([[0]])
+        # if len(meas_list) > 0:
+        #     self.unassigned_meas = [0]
+        # if len(track_list) > 0:
+        #     self.unassigned_tracks = [0]
+        # if len(meas_list) > 0 and len(track_list) > 0: 
+        #     self.association_matrix = np.matrix([[0]])
         
         ############
         # END student code
@@ -56,33 +68,42 @@ class Association:
                 
     def get_closest_track_and_meas(self):
         ############
-        # TODO Step 3: find closest track and measurement:
-        # - find minimum entry in association matrix
-        # - delete row and column
-        # - remove corresponding track and measurement from unassigned_tracks and unassigned_meas
-        # - return this track and measurement
+        # - find indices of closest track and measurement for next update
+        min_idx = np.unravel_index(np.argmin(self.association_matrix, axis=None), self.association_matrix.shape)
+        # - return NAN if no more associations can be found (i.e. minimum entry in association matrix is infinity)
+        if self.association_matrix[min_idx] == np.inf:
+            return np.nan, np.nan 
+        # - delete row and column in association matrix for closest track and measurement
+        self.association_matrix = np.delete(self.association_matrix, min_idx[0],0)
+        self.association_matrix = np.delete(self.association_matrix, min_idx[1],1)
+        # - remove found track number from unassigned_tracks, meas number from unassigned_meas
+        update_track = self.unassigned_tracks[min_idx[0]] 
+        update_meas = self.unassigned_meas[min_idx[1]]
+        self.unassigned_tracks.pop(min_idx[0])
+        self.unassigned_meas.pop(min_idx[1])
+        # - return indices of closest track and measurement for next update
+        return update_track, update_meas
         ############
 
-        # the following only works for at most one track and one measurement
-        update_track = 0
-        update_meas = 0
+        # # the following only works for at most one track and one measurement
+        # update_track = 0
+        # update_meas = 0
         
-        # remove from list
-        self.unassigned_tracks.remove(update_track) 
-        self.unassigned_meas.remove(update_meas)
-        self.association_matrix = np.matrix([])
+        # # remove from list
+        # self.unassigned_tracks.remove(update_track) 
+        # self.unassigned_meas.remove(update_meas)
+        # self.association_matrix = np.matrix([])
             
-        ############
-        # END student code
-        ############ 
-        return update_track, update_meas     
+        # ############
+        # # END student code
+        # ############ 
+        # return update_track, update_meas     
 
     def gating(self, MHD, sensor): 
         ############
-        # TODO Step 3: return True if measurement lies inside gate, otherwise False
+        return MHD < chi2.ppf(params.gating_threshold, 2)
         ############
-        
-        pass    
+
         
         ############
         # END student code
@@ -90,10 +111,12 @@ class Association:
         
     def MHD(self, track, meas, KF):
         ############
-        # TODO Step 3: calculate and return Mahalanobis distance
+        gamma = KF.gamma(track,meas)
+        S = KF.S(track, meas, None)
+        MHD = gamma.transpose()*np.linalg.inv(S)*gamma # Mahalanobis distance formula
+        return MHD
         ############
         
-        pass
         
         ############
         # END student code

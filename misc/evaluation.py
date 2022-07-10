@@ -241,7 +241,7 @@ def make_movie(path):
     for image in images:
         fname = os.path.join(path, image)
         video.write(cv2.imread(fname))
-        os.remove(fname) # clean up
+        # os.remove(fname) # clean up
 
     cv2.destroyAllWindows()
     video.release()

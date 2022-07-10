@@ -113,9 +113,7 @@ class Trackmanagement:
             # check visibility    
             if meas_list: # if not empty
                 if meas_list[0].sensor.in_fov(track.x):
-                    self.track_list[i].score = 0.7*self.track_list[i].score
-                    print("trollazo")
-                    pass 
+                    self.track_list[i].score = self.track_list[i].score - 0.4
 
         # delete old tracks  
         tracks_idxs_to_del = []
@@ -152,7 +150,7 @@ class Trackmanagement:
         self.track_list.remove(track)
         
     def handle_updated_track(self, track):      
-        track.score = track.score*1.3
+        track.score = track.score + 0.4
         if track.score > params.confirmed_threshold:
             track.state = "confirmed"
             return
