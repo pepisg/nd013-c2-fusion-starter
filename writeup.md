@@ -58,6 +58,14 @@ When labels are used as detections, perfect scores are achieved as shown below:
 
 # Writeup: Track 3D-Objects Over Time
 
+RMSE error of single target tracking:
+
+![covariance](https://user-images.githubusercontent.com/71234974/178126613-d67035ee-0e04-48eb-8b7f-2a8a1c30b221.png)
+
+RMSE with track mangement 
+
+![ex2](https://user-images.githubusercontent.com/71234974/178127195-6a33cb30-c9f5-4caa-8d55-59265fbfdced.png)
+
 Please use this starter template to answer the following questions:
 
 ### 1. Write a short recap of the four tracking steps and what you implemented there (filter, track management, association, camera fusion). Which results did you achieve? Which part of the project was most difficult for you to complete, and why?
