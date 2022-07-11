@@ -70,6 +70,7 @@ Multi object RMSE
 
 ![Figure_2](https://user-images.githubusercontent.com/71234974/178128614-22c3841e-6f1e-4cf2-8fd4-5de67c32f2e8.png)
 
+Tracking video was uploaded to google drive to avoid pushing heavy files to github. You can see it in this [link](https://drive.google.com/file/d/1SoQVw_RS9_CNYwROMHSt8Cv6KqURFsdf/view?usp=sharing)
 
 Please use this starter template to answer the following questions:
 
