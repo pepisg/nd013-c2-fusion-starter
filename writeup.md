@@ -70,7 +70,10 @@ Multi object RMSE
 
 ![Figure_2](https://user-images.githubusercontent.com/71234974/178128614-22c3841e-6f1e-4cf2-8fd4-5de67c32f2e8.png)
 
-Tracking video was uploaded to google drive to avoid pushing heavy files to github. You can see it in this [link](https://drive.google.com/file/d/1SoQVw_RS9_CNYwROMHSt8Cv6KqURFsdf/view?usp=sharing)
+Tracking video was uploaded to google drive to avoid pushing heavy files to github. You can see it in this [link](https://drive.google.com/file/d/1SoQVw_RS9_CNYwROMHSt8Cv6KqURFsdf/view?usp=sharing). The final RMSE plot is shown below:
+
+![rmsefinal](https://user-images.githubusercontent.com/71234974/178858440-eb4ad59e-dad6-4774-b692-48105704b1c0.png)
+
 
 Please use this starter template to answer the following questions:
 
