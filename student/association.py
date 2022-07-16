@@ -52,7 +52,7 @@ class Association:
         for n, track in enumerate(track_list):
             for m, meas in enumerate(meas_list):
                 mhd = self.MHD(track=track, meas=meas, KF=KF)
-                if self.gating(mhd, None):
+                if self.gating(mhd, meas.sensor):
                     self.association_matrix[n,m] = mhd
         
         # if len(meas_list) > 0:
@@ -101,7 +101,7 @@ class Association:
 
     def gating(self, MHD, sensor): 
         ############
-        return MHD < chi2.ppf(params.gating_threshold, 2)
+        return MHD < chi2.ppf(params.gating_threshold, sensor.dim_meas)
         ############
 
         

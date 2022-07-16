@@ -42,12 +42,15 @@ class Filter:
     @property
     def Q(self):
         ############
-        return np.matrix([[params.dt**3*params.q/3, 0, 0, params.dt**2*params.q/2, 0, 0],
-                        [0, params.dt**3*params.q/3, 0, 0, params.dt**2*params.q/2, 0],
-                        [0, 0, params.dt**3*params.q/3, 0, 0, params.dt**2*params.q/2],
-                        [params.dt**2*params.q/2, 0, 0, params.dt*params.q, 0, 0],
-                        [0, params.dt**2*params.q/2, 0, 0, params.dt*params.q, 0],
-                        [0, 0, params.dt**2*params.q/2, 0, 0, params.dt*params.q]])
+        q3 = params.dt**3*params.q/3
+        q2 = params.dt**2*params.q/2
+        q1 = params.dt*params.q
+        return np.matrix([[q3, 0, 0, q2, 0, 0],
+                        [0, q3, 0, 0, q2, 0],
+                        [0, 0, q3, 0, 0, q2],
+                        [q2, 0, 0, q1, 0, 0],
+                        [0, q2, 0, 0, q1, 0],
+                        [0, 0, q2, 0, 0, q1]])
         ############
         ############
         # END student code
